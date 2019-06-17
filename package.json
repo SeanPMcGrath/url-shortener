@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/SeanPMcGrath/url-shortener/issues"
   },
-  "homepage": "https://github.com/SeanPMcGrath/url-shortener#readme"
+  "homepage": "https://github.com/SeanPMcGrath/url-shortener#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
