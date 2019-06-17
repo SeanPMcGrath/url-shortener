@@ -1,3 +1,5 @@
+const dns = require("dns");
+const Joi = require("@hapi/joi"); //Joi is apparently depreciated per the npm Joi webpage. This is the successor
 const express = require("express");
 const app = express();
 
@@ -35,6 +37,21 @@ app.get("/api/shorturl/:id", (req, res) => {
 });
 
 app.post("/api/shorturl/new", (req, res) => {
+  const schema = {
+    original_url: Joi.string()
+      .uri()
+      .required()
+  };
+
+  console.log(dns.lookup(req.body.original_url)); //Need to work on this more
+
+  const result = Joi.validate(req.body, schema);
+
+  if (result.error) {
+    res.sendStatus(400).send(result.error.details[0].message); //details[0].message gives only the key error message
+    return;
+  }
+
   const shortcut = {
     original_url: req.body.original_url,
     short_url: shortcuts.length + 1
