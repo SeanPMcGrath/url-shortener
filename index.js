@@ -1,4 +1,4 @@
-const dns = require("dns");
+const dns = require("dns"); //for dns.lookup function
 const Joi = require("@hapi/joi"); //Joi is apparently depreciated per the npm Joi webpage. This is the successor
 const express = require("express");
 const app = express();
@@ -36,14 +36,10 @@ app.get("/api/shorturl/:id", (req, res) => {
   res.sendStatus(200);
 });
 
-app.post("/api/shorturl/new", (req, res) => {
+app.post("/api/shorturl/new", async (req, res) => {
   const schema = {
-    original_url: Joi.string()
-      .uri()
-      .required()
+    original_url: Joi.string().required()
   };
-
-  console.log(dns.lookup(req.body.original_url)); //Need to work on this more
 
   const result = Joi.validate(req.body, schema);
 
@@ -52,12 +48,33 @@ app.post("/api/shorturl/new", (req, res) => {
     return;
   }
 
-  const shortcut = {
-    original_url: req.body.original_url,
-    short_url: shortcuts.length + 1
-  };
-  shortcuts.push(shortcut);
-  res.send(shortcut);
+  const linkUrl = req.body.original_url;
+
+  let filteredUrl = "";
+
+  if (linkUrl.startsWith("http://")) {
+    filteredUrl = linkUrl.slice(7); // http:// is 7 characters. Takes contents after.
+  } else if (linkUrl.startsWith("https://")) {
+    filteredUrl = linkUrl.slice(8); // https:// is 8 characters. Takes contents after.
+  } else {
+    filteredUrl = linkUrl;
+  }
+
+  console.log("filteredUrl: " + filteredUrl);
+
+  dns.lookup(filteredUrl, async function(err, addresses, family) {
+    console.log(addresses);
+    if (!addresses) {
+      res.status(400).send("Bad Request: Site has no IP address");
+    } else {
+      const shortcut = {
+        original_url: req.body.original_url,
+        short_url: shortcuts.length + 1
+      };
+      shortcuts.push(shortcut);
+      res.send(shortcut);
+    }
+  });
 });
 
 const port = process.env.PORT || 3000;
