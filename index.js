@@ -38,13 +38,13 @@ app.get("/api/shorturl/:id", (req, res) => {
 
 app.post("/api/shorturl/new", async (req, res) => {
   const schema = {
-    original_url: Joi.string().required()
+    original_url: Joi.string().required() //.uri() won't accept uri's without http
   };
 
   const result = Joi.validate(req.body, schema);
 
   if (result.error) {
-    res.sendStatus(400).send(result.error.details[0].message); //details[0].message gives only the key error message
+    res.status(400).send(result.error.details[0].message); //details[0].message gives only the key error message
     return;
   }
 
@@ -52,6 +52,7 @@ app.post("/api/shorturl/new", async (req, res) => {
 
   let filteredUrl = "";
 
+  //dns.lookup doesn't take addresses with http or https
   if (linkUrl.startsWith("http://")) {
     filteredUrl = linkUrl.slice(7); // http:// is 7 characters. Takes contents after.
   } else if (linkUrl.startsWith("https://")) {
