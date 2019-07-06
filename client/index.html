@@ -7,9 +7,13 @@
     <title>Url Shortener - spmcgrath</title>
   </head>
   <body>
+    <!--
+      The function has to be assigned to the window in order to work (at least for doing an alert)
+      If the function name matches an element id it won't work
+    -->
     <form onsubmit="urlSubmit()">
       <input type="text" name="original_url" />
-      <input id="urlSubmit" type="submit" value="Submit" />
+      <input id="urlSubmitBtn" type="submit" value="Submit" />
     </form>
 
     <div id="testDiv">test</div>

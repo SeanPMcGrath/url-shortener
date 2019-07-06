@@ -1,21 +1,10 @@
-// function urlSubmit(originalUrl) {
-//   urlObject = {
-//     original_url: originalUrl
-//   };
+// function initialSetting() {
+//   $("#testDiv").html("JavaScript ran");
+//   // $("form").attr("onsubmit", "urlSubmit()");
+//   $("#urlSubmit2").attr("value", "Submitify");
 // }
+// initialSetting();
 
-// $("#urlSubmit").click(() => {
-//   alert("Button was clicked");
-// });
-
-function initialSetting() {
-  $("#testDiv").html("JavaScript ran");
-  $("form").attr("onsubmit", "urlSubmit()");
-  $("#urlSubmit").attr("value", "Submitify");
-}
-initialSetting();
-
-function urlSubmit() {
-  $("#testDiv").html("JavaScript button ran");
+window.urlSubmit = function() {
   alert("Button was clicked");
-}
+};
