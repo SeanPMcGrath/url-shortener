@@ -11,12 +11,13 @@
       The function has to be assigned to the window in order to work (at least for doing an alert)
       If the function name matches an element id it won't work
     -->
-    <form onsubmit="urlSubmit()">
-      <input type="text" name="original_url" />
-      <input id="urlSubmitBtn" type="submit" value="Submit" />
-    </form>
+    <input type="text" id="original_url" value="hello" />
+    <button id="urlSubmitBtn" type="button" onclick="urlSubmit()">
+      Submit
+    </button>
 
-    <div id="testDiv">test</div>
+    <p id="originalLink">waiting</p>
+    <p id="newLink">placeholder</p>
     <!--Import jQuery from google hosting-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/index.js"></script>
