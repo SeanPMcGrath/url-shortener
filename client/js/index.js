@@ -13,25 +13,26 @@ function urlSubmit() {
     original_url: $("#original_url").val()
   });
 
-  $.get("http://localhost:5000/api/shorturls", function(data) {
-    $("#newLink").append("Data: " + data);
-  });
-
-  // $.ajax({
-  //   url: "http://localhost:5000/api/shorturl/new",
-  //   type: "POST",
-  //   data: urlObject,
-  //   dataType: "JSON",
-  //   beforeSend: () => {
-  //     $("#newLink").append("<br>beforeSend<br>");
-  //   },
-  //   error: () => {
-  //     $("#newLink").append("<br>error<br>");
-  //   },
-  //   success: () => {
-  //     $("#newLink").append("<br>success<br>");
-  //   }
+  // $.get("http://localhost:5000/api/shorturls", function(data) {
+  //   $("#newLink").append("Data: " + data);
   // });
 
-  //$("#newLink").append(urlObject);
+  $.ajax({
+    url: "http://localhost:5000/api/shorturl/new",
+    type: "POST",
+    //data: urlObject,
+    data: urlObject,
+    contentType: "application/json",
+    beforeSend: () => {
+      $("#newLink").append("<br>beforeSend<br>");
+      $("#newLink").append(urlObject);
+      console.log(urlObject);
+    },
+    error: () => {
+      $("#newLink").append("<br>error<br>");
+    },
+    success: () => {
+      $("#newLink").append("<br>success<br>");
+    }
+  });
 }
