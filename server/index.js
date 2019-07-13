@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -41,8 +41,9 @@ app.get("/api/shorturl/:id", (req, res) => {
   });
   const destinationUrl = urlEntry.original_url;
   console.log("Located destination url: " + destinationUrl);
-  //window.location.replace("www.google.com");
-  res.sendStatus(200);
+  // window.location.replace(destinationUrl);
+  // res.sendStatus(200);
+  res.redirect(destinationUrl);
 });
 
 app.post("/api/shorturl/new", async (req, res) => {

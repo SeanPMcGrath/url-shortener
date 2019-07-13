@@ -28,11 +28,20 @@ function urlSubmit() {
       $("#newLink").append(urlObject);
       console.log(urlObject);
     },
-    error: () => {
+    /*Server is sending back an object, not a JSON. Data format is:
+    { 
+      original_url: "www.reddit.com", 
+      short_url: 2 
+    }*/
+    error: data => {
       $("#newLink").append("<br>error<br>");
+      $("#newLink").append(JSON.stringify(data));
     },
-    success: () => {
+    success: data => {
       $("#newLink").append("<br>success<br>");
+      console.log(data);
+      const newLink = "http://localhost:5000/api/shorturl/" + data.short_url;
+      $("#newLink").append(newLink);
     }
   });
 }
