@@ -15,8 +15,8 @@ app.use(function(req, res, next) {
 app.use(express.json());
 
 shortcuts = [
-  { original_url: "www.google.com", short_url: 1 },
-  { original_url: "www.reddit.com", short_url: 2 }
+  { original_url: "https://www.google.com", short_url: 1 },
+  { original_url: "https://www.reddit.com", short_url: 2 }
 ];
 
 app.get("/api/shorturls", (req, res) => {
@@ -24,33 +24,39 @@ app.get("/api/shorturls", (req, res) => {
 });
 
 app.get("/api/shorturl/:id", (req, res) => {
+  const schema = {
+    id: Joi.string()
+      .regex(/\D/, { invert: true })
+      .max(20)
+      .required()
+    //\D is non-digits - invert to not accept any
+  };
+
+  const result = Joi.validate(req.params, schema);
+
+  if (result.error) {
+    res.status(400).send(result.error.details[0].message); //details[0].message gives only the key error message
+    return;
+  }
+
   req.params.id = parseInt(req.params.id, 10); //Id is passed in as a string
-  console.log("Req id: " + req.params.id);
-  const urlEntry = shortcuts.find(urlEntry => {
-    console.log(
-      "Req Id in find: " + req.params.id + ", Type: " + typeof req.params.id
-    );
-    console.log(
-      "short_url id: " +
-        urlEntry.short_url +
-        ", Type: " +
-        typeof urlEntry.short_url
-    );
-    console.log(req.params.id === urlEntry.short_url);
-    return req.params.id === urlEntry.short_url;
+  const urlEntry = shortcuts.find(searchEntries => {
+    return req.params.id === searchEntries.short_url;
+    /*find goes through every object in the array starting at index 0
+    Could modify to start at the index of the id and work backwards
+    since, while entries could be deleted, entries should never be unshifted further out */
   });
   const destinationUrl = urlEntry.original_url;
-  console.log("Located destination url: " + destinationUrl);
-  // window.location.replace(destinationUrl);
-  // res.sendStatus(200);
-  res.redirect(destinationUrl);
+  res.redirect(302, destinationUrl);
+  //without the http this only replaces the id part of the url with destinationUrl
+  //301 is a permanent move. 302 is temporary.
 });
 
 app.post("/api/shorturl/new", async (req, res) => {
-  console.log(req.body);
-  console.log(typeof req.body);
   const schema = {
-    original_url: Joi.string().required() //.uri() won't accept uri's without http
+    original_url: Joi.string()
+      .uri()
+      .required() //.uri() won't accept uri's without http
   };
 
   const result = Joi.validate(req.body, schema);
@@ -63,6 +69,7 @@ app.post("/api/shorturl/new", async (req, res) => {
   const linkUrl = req.body.original_url;
 
   let filteredUrl = "";
+  let checkedUrl = "";
 
   //dns.lookup doesn't take addresses with http or https
   if (linkUrl.startsWith("http://")) {
@@ -73,10 +80,15 @@ app.post("/api/shorturl/new", async (req, res) => {
     filteredUrl = linkUrl;
   }
 
-  console.log("filteredUrl: " + filteredUrl);
+  //if filtered url contains a / eliminate the / and everything after for DNS lookup
 
-  dns.lookup(filteredUrl, async function(err, addresses, family) {
-    console.log(addresses);
+  if (filteredUrl.includes("/")) {
+    checkedUrl = filteredUrl.slice(0, filteredUrl.indexOf("/"));
+  } else {
+    checkedUrl = filteredUrl;
+  }
+
+  dns.lookup(checkedUrl, async function(err, addresses, family) {
     if (!addresses) {
       res.status(400).send("Bad Request: Site has no IP address");
     } else {
