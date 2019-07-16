@@ -13,20 +13,13 @@ function urlSubmit() {
     original_url: $("#original_url").val()
   });
 
-  // $.get("http://localhost:5000/api/shorturls", function(data) {
-  //   $("#newLink").append("Data: " + data);
-  // });
-
   $.ajax({
     url: "http://localhost:5000/api/shorturl/new",
     type: "POST",
-    //data: urlObject,
     data: urlObject,
     contentType: "application/json",
     beforeSend: () => {
-      $("#newLink").append("<br>beforeSend<br>");
-      $("#newLink").append(urlObject);
-      console.log(urlObject);
+      $("#originalLink").html(urlObject);
     },
     /*Server is sending back an object, not a JSON. Data format is:
     { 
@@ -34,12 +27,11 @@ function urlSubmit() {
       short_url: 2 
     }*/
     error: data => {
-      $("#newLink").append("<br>error<br>");
+      $("#newLink").html("<br>error<br>");
       $("#newLink").append(JSON.stringify(data));
     },
     success: data => {
-      $("#newLink").append("<br>success<br>");
-      console.log(data);
+      $("#newLink").html("<br>success<br>");
       const newLink = "http://localhost:5000/api/shorturl/" + data.short_url;
       $("#newLink").append(newLink);
     }
