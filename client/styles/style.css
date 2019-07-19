@@ -2,17 +2,22 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  height: 100vh;
   background-color: pink;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 #contentDiv {
   margin: auto;
+  -webkit-transform: translate(0, -10%);
+          transform: translate(0, -10%);
   background-color: #ffdae0;
-  padding: 40px 10px;
+  padding: 10px 10px 40px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -23,6 +28,20 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  border-right: 2px solid #ffb1be;
+  border-bottom: 2px solid #ffb1be;
+  border-left: 1px solid #ffb1be;
+  border-top: 1px solid #ffb1be;
+  border-radius: 5px;
+}
+
+#pageName {
+  margin: 10px auto 15px auto;
+}
+
+.headingContent {
+  margin: 5px auto;
+  text-align: center;
 }
 
 #inputDiv {

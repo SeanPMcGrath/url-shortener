@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Url Shortener - spmcgrath</title>
+    <!--bootstrap meta and link-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <!--End bootstrap items-->
     <link rel="stylesheet" type="text/css" href="styles/style.css" />
   </head>
   <body>
@@ -13,9 +22,21 @@
       If the function name matches an element id it won't work
     -->
     <div id="contentDiv">
+      <h1 id="pageName" class="headingContent">Sean's Url Shortener</h1>
+      <h6 class="headingContent instructions">
+        Submit a valid Url (it needs the http part) and get a substitute back
+      </h6>
+      <h6 class="headingContent instructions">
+        Invalid Urls or Urls for non-existant domains will be rejected
+      </h6>
       <div id="inputDiv">
-        <input type="text" id="original_url" value="https://w3schools.com" />
-        <button id="urlSubmitBtn" type="button" onclick="urlSubmit()">
+        <input type="text" id="original_url" placeholder="Enter Url here" />
+        <button
+          id="urlSubmitBtn"
+          type="button"
+          class="btn btn-default"
+          onclick="urlSubmit()"
+        >
           Submit
         </button>
       </div>

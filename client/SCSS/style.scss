@@ -1,18 +1,36 @@
 $c-background: pink;
+$c-borders: darken($c-background, 3%);
 
 body {
   display: flex;
-  flex-direction: column;
+  height: 100vh;
   background-color: $c-background;
+  align-items: center;
+  justify-content: center;
 }
 
 #contentDiv {
   margin: auto;
+  transform: translate(0, -10%);
   background-color: lighten($c-background, 5%);
-  padding: 40px 10px;
+  padding: 10px 10px 40px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-right: 2px solid $c-borders;
+  border-bottom: 2px solid $c-borders;
+  border-left: 1px solid $c-borders;
+  border-top: 1px solid $c-borders;
+  border-radius: 5px;
+}
+
+#pageName {
+  margin: 10px auto 15px auto;
+}
+
+.headingContent {
+  margin: 5px auto;
+  text-align: center;
 }
 
 #inputDiv {
