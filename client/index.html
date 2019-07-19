@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Url Shortener - spmcgrath</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
   </head>
   <body>
     <!--
       The function has to be assigned to the window in order to work (at least for doing an alert)
       If the function name matches an element id it won't work
     -->
-    <input type="text" id="original_url" value="https://w3schools.com" />
-    <button id="urlSubmitBtn" type="button" onclick="urlSubmit()">
-      Submit
-    </button>
+    <div id="contentDiv">
+      <div id="inputDiv">
+        <input type="text" id="original_url" value="https://w3schools.com" />
+        <button id="urlSubmitBtn" type="button" onclick="urlSubmit()">
+          Submit
+        </button>
+      </div>
+      <p id="originalLink">waiting</p>
+      <p id="newLink">placeholder</p>
+    </div>
 
-    <p id="originalLink">waiting</p>
-    <p id="newLink">placeholder</p>
     <!--Import jQuery from google hosting-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/index.js"></script>

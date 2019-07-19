@@ -1,0 +1,30 @@
+$c-background: pink;
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: $c-background;
+}
+
+#contentDiv {
+  margin: auto;
+  background-color: lighten($c-background, 5%);
+  padding: 40px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#inputDiv {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+#original_url {
+  width: 500px;
+}
+
+p {
+  margin: 5px auto;
+}
