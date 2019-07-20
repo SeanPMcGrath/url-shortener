@@ -62,7 +62,7 @@ app.post("/api/shorturl/new", async (req, res) => {
   const result = Joi.validate(req.body, schema);
 
   if (result.error) {
-    res.status(400).send(result.error.details[0].message); //details[0].message gives only the key error message
+    res.status(400).send("Not a valid Url"); //details[0].message gives only the key error message
     return;
   }
 
@@ -90,7 +90,7 @@ app.post("/api/shorturl/new", async (req, res) => {
 
   dns.lookup(checkedUrl, async function(err, addresses, family) {
     if (!addresses) {
-      res.status(400).send("Bad Request: Site has no IP address");
+      res.status(400).send("Invalid Domain");
     } else {
       const shortcut = {
         original_url: req.body.original_url,

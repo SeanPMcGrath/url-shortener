@@ -27,10 +27,16 @@
         Submit a valid Url (it needs the http part) and get a substitute back
       </h6>
       <h6 class="headingContent instructions">
-        Invalid Urls or Urls for non-existant domains will be rejected
+        Invalidly formatted Urls or Urls for nonexistent domains will be
+        rejected
       </h6>
       <div id="inputDiv">
-        <input type="text" id="original_url" placeholder="Enter Url here" />
+        <input
+          type="text"
+          id="original_url"
+          placeholder="Enter Url here"
+          autocomplete="off"
+        />
         <button
           id="urlSubmitBtn"
           type="button"
@@ -40,8 +46,8 @@
           Submit
         </button>
       </div>
-      <p id="originalLink">waiting</p>
-      <p id="newLink">placeholder</p>
+      <div id="submittedUrl" class="reactionDiv"></div>
+      <div id="responseDiv" class="reactionDiv"></div>
     </div>
 
     <!--Import jQuery from google hosting-->

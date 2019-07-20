@@ -7,7 +7,6 @@
 
 function urlSubmit() {
   let textValue = $("#original_url").val();
-  $("#originalLink").text(textValue);
 
   const urlObject = JSON.stringify({
     original_url: $("#original_url").val()
@@ -19,7 +18,8 @@ function urlSubmit() {
     data: urlObject,
     contentType: "application/json",
     beforeSend: () => {
-      $("#originalLink").html(urlObject);
+      $("#submittedUrl").html(textValue);
+      $("#responseDiv").empty();
     },
     /*Server is sending back an object, not a JSON. Data format is:
     { 
@@ -27,13 +27,14 @@ function urlSubmit() {
       short_url: 2 
     }*/
     error: data => {
-      $("#newLink").html("<br>error<br>");
-      $("#newLink").append(JSON.stringify(data));
+      $("#responseDiv").html(data.responseText);
     },
     success: data => {
-      $("#newLink").html("<br>success<br>");
       const newLink = "http://localhost:5000/api/shorturl/" + data.short_url;
-      $("#newLink").append(newLink);
+      $("#responseDiv").append('<a id="newLink2" />');
+      $("#newLink2").attr("href", newLink);
+      $("#newLink2").html(newLink);
+      $("#original_url").val("");
     }
   });
 }

@@ -13,11 +13,12 @@ body {
 }
 
 #contentDiv {
+  width: 650px;
   margin: auto;
   -webkit-transform: translate(0, -10%);
           transform: translate(0, -10%);
   background-color: #ffdae0;
-  padding: 10px 10px 40px 10px;
+  padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -60,5 +61,28 @@ body {
 
 p {
   margin: 5px auto;
+}
+
+.reactionDiv {
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 10px;
+  border: none;
+  resize: none;
+  text-align: center;
+}
+
+#submittedUrl {
+  overflow: auto;
+  height: 75px;
+}
+
+#responseDiv {
+  height: 25px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,4 @@
+-Center submitted url text vertically while showing top part of scrolling texts
+-Add copy button for short url
+-Format for mobile
+-Deploy on Heroku

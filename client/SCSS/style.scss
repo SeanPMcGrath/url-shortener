@@ -10,10 +10,11 @@ body {
 }
 
 #contentDiv {
+  width: 650px;
   margin: auto;
   transform: translate(0, -10%);
   background-color: lighten($c-background, 5%);
-  padding: 10px 10px 40px 10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,4 +46,25 @@ body {
 
 p {
   margin: 5px auto;
+}
+
+.reactionDiv {
+  height: 70px;
+  //background-color: aqua;
+  display: flex;
+  justify-content: center;
+  //align-items: center;
+  margin: 10px;
+  border: none;
+  resize: none;
+  text-align: center;
+}
+
+#submittedUrl {
+  overflow: auto;
+  height: 75px;
+}
+
+#responseDiv {
+  height: 25px;
 }
