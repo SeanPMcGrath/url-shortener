@@ -2,3 +2,5 @@
 -Add copy button for short url
 -Format for mobile
 -Deploy on Heroku
+-Add MongoDB functionality
+-Add 404 error message

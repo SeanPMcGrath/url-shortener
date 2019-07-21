@@ -1,3 +1,4 @@
+const helmet = require("helmet");
 const dns = require("dns"); //for dns.lookup function
 const Joi = require("@hapi/joi"); //Joi is apparently depreciated per the npm Joi webpage. This is the successor
 const express = require("express");
@@ -9,10 +10,11 @@ app.use(function(req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  next();
+  next(); //yes, the next is necessary here
 });
 
 app.use(express.json());
+app.use(helmet());
 
 shortcuts = [
   { original_url: "https://www.google.com", short_url: 1 },
