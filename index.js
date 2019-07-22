@@ -15,6 +15,7 @@ app.use(function(req, res, next) {
 
 app.use(express.json());
 app.use(helmet());
+app.use(express.static("client/"));
 
 shortcuts = [
   { original_url: "https://www.google.com", short_url: 1 },
