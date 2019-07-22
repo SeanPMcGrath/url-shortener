@@ -1,7 +1,10 @@
 -Center submitted url text vertically while showing top part of scrolling texts
 -Add copy button for short url
 -Format for mobile
--Deploy on Heroku
 -Add MongoDB functionality
 -Add 404 error message
 -Check if port message at the end of the code is still necessary in production
+-Figure out if shortcuts array is ever reset by heroku (ie why I would want to use mongoDB instead of just keeping the array)
+
+Done
+-Deploy on Heroku
