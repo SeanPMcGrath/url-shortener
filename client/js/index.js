@@ -13,7 +13,7 @@ function urlSubmit() {
   });
 
   $.ajax({
-    url: "http://localhost:5000/api/shorturl/new",
+    url: "https://spmcgrath-url-shortener.herokuapp.com/api/shorturl/new",
     type: "POST",
     data: urlObject,
     contentType: "application/json",
@@ -30,7 +30,9 @@ function urlSubmit() {
       $("#responseDiv").html(data.responseText);
     },
     success: data => {
-      const newLink = "http://localhost:5000/api/shorturl/" + data.short_url;
+      const newLink =
+        "https://spmcgrath-url-shortener.herokuapp.com/api/shorturl/" +
+        data.short_url;
       $("#responseDiv").append('<a id="newLink2" />');
       $("#newLink2").attr("href", newLink);
       $("#newLink2").html(newLink);

@@ -4,3 +4,4 @@
 -Deploy on Heroku
 -Add MongoDB functionality
 -Add 404 error message
+-Check if port message at the end of the code is still necessary in production
