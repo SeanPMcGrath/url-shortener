@@ -4,7 +4,8 @@
 -Add MongoDB functionality
 -Add 404 error message
 -Check if port message at the end of the code is still necessary in production
--Figure out if shortcuts array is ever reset by heroku (ie why I would want to use mongoDB instead of just keeping the array)
+-figure out switching between development and production environments
 
 Done
 -Deploy on Heroku
+-Figure out if shortcuts array is ever reset by heroku (ie why I would want to use mongoDB instead of just keeping the array) - resets any time the app is restarted

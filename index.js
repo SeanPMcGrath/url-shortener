@@ -1,21 +1,28 @@
+const config = require("config");
 const helmet = require("helmet");
 const dns = require("dns"); //for dns.lookup function
 const Joi = require("@hapi/joi"); //Joi is apparently depreciated per the npm Joi webpage. This is the successor
 const express = require("express");
 const app = express();
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next(); //yes, the next is necessary here
-});
+if (app.get("env") === "development") {
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next(); //yes, the next is necessary here
+  });
+}
 
 app.use(express.json());
 app.use(helmet());
-app.use(express.static("client/"));
+app.use(express.static("client/")); //permits showing of static files in client folder (ie html)
+
+//set environment - in terminal: export NODE_ENV=development
+//use config to get config variables like config.get.serverLocation
+console.log("Current config is: " + app.get("env"));
 
 shortcuts = [
   { original_url: "https://www.google.com", short_url: 1 },
