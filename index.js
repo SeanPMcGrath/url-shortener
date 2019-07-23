@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const dns = require("dns"); //for dns.lookup function
 const Joi = require("@hapi/joi"); //Joi is apparently depreciated per the npm Joi webpage. This is the successor
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 
 if (app.get("env") === "development") {
@@ -24,6 +25,17 @@ app.use(express.static("client/")); //permits showing of static files in client 
 //use config to get config variables like config.get.serverLocation
 console.log("Current config is: " + app.get("env"));
 
+mongoose
+  .connect("mongodb://localhost/url-shortener") //change localhost for production. Define whole string in config files
+  .then(() => console.log("Connected to database"))
+  .catch(err => console.error("Connection to database failed"));
+
+const urlSchema = new mongoose.Schema({
+  original_url: String
+});
+
+const UrlEntry = mongoose.model("UrlEntry", urlSchema);
+
 shortcuts = [
   { original_url: "https://www.google.com", short_url: 1 },
   { original_url: "https://www.reddit.com", short_url: 2 }
@@ -33,13 +45,12 @@ app.get("/api/shorturls", (req, res) => {
   res.send(shortcuts);
 });
 
-app.get("/api/shorturl/:id", (req, res) => {
+app.get("/api/shorturl/:id", async (req, res) => {
   const schema = {
     id: Joi.string()
-      .regex(/\D/, { invert: true })
-      .max(20)
+      .alphanum()
+      .max(25)
       .required()
-    //\D is non-digits - invert to not accept any
   };
 
   const result = Joi.validate(req.params, schema);
@@ -49,13 +60,7 @@ app.get("/api/shorturl/:id", (req, res) => {
     return;
   }
 
-  req.params.id = parseInt(req.params.id, 10); //Id is passed in as a string
-  const urlEntry = shortcuts.find(searchEntries => {
-    return req.params.id === searchEntries.short_url;
-    /*find goes through every object in the array starting at index 0
-    Could modify to start at the index of the id and work backwards
-    since, while entries could be deleted, entries should never be unshifted further out */
-  });
+  const urlEntry = await UrlEntry.findById(req.params.id);
   const destinationUrl = urlEntry.original_url;
   res.redirect(302, destinationUrl);
   //without the http this only replaces the id part of the url with destinationUrl
@@ -102,12 +107,21 @@ app.post("/api/shorturl/new", async (req, res) => {
     if (!addresses) {
       res.status(400).send("Invalid Domain");
     } else {
-      const shortcut = {
-        original_url: req.body.original_url,
-        short_url: shortcuts.length + 1
-      };
-      shortcuts.push(shortcut);
-      res.send(shortcut);
+      // const shortcut = {
+      //   original_url: req.body.original_url,
+      //   short_url: shortcuts.length + 1
+      // };
+      // shortcuts.push(shortcut);
+      // res.send(shortcut);
+
+      let urlEntry = new UrlEntry({
+        original_url: req.body.original_url
+      });
+      const result = await urlEntry.save();
+
+      console.log(result);
+
+      res.send(result);
     }
   });
 });
