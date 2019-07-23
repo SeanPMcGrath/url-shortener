@@ -36,13 +36,9 @@ const urlSchema = new mongoose.Schema({
 
 const UrlEntry = mongoose.model("UrlEntry", urlSchema);
 
-shortcuts = [
-  { original_url: "https://www.google.com", short_url: 1 },
-  { original_url: "https://www.reddit.com", short_url: 2 }
-];
-
-app.get("/api/shorturls", (req, res) => {
-  res.send(shortcuts);
+app.get("/api/shorturls", async (req, res) => {
+  const urlEntries = await UrlEntry.find().sort({ _id: -1 });
+  res.send(urlEntries);
 });
 
 app.get("/api/shorturl/:id", async (req, res) => {
