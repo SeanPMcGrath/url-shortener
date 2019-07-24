@@ -1,9 +1,5 @@
-// function initialSetting() {
-//   $("#testDiv").html("JavaScript ran");
-//   // $("form").attr("onsubmit", "urlSubmit()");
-//   $("#urlSubmit2").attr("value", "Submitify");
-// }
-// initialSetting();
+const hostUrl = "http://localhost:5000/";
+//const hostUrl = "https://spmcgrath-url-shortener.herokuapp.com/"
 
 function urlSubmit() {
   let textValue = $("#original_url").val();
@@ -13,7 +9,7 @@ function urlSubmit() {
   });
 
   $.ajax({
-    url: "http://localhost:5000/api/shorturl/new",
+    url: hostUrl + "api/shorturl/new",
     type: "POST",
     data: urlObject,
     contentType: "application/json",
@@ -23,14 +19,14 @@ function urlSubmit() {
     },
     /*Server is sending back an object, not a JSON. Data format is:
     { 
+      _id: (MongoDB id)
       original_url: "www.reddit.com", 
-      short_url: 2 
     }*/
     error: data => {
       $("#responseDiv").html(data.responseText);
     },
     success: data => {
-      const newLink = "http://localhost:5000/api/shorturl/" + data._id;
+      const newLink = hostUrl + "api/shorturl/" + data._id;
       $("#responseDiv").append('<a id="newLink2" />');
       $("#newLink2").attr("href", newLink);
       $("#newLink2").html(newLink);

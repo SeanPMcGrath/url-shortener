@@ -1,1 +1,3 @@
-{}
+{
+  "databasePassword": "url_shortener_databasePassword"
+}

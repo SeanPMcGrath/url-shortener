@@ -1,3 +1,4 @@
 {
-  "serverLocation": ""
+  "databaseLocation1": "mongodb+srv://spmcgrath-url-shortener:",
+  "databaseLocation2": "@cluster0-wupg1.azure.mongodb.net/test?retryWrites=true&w=majority"
 }

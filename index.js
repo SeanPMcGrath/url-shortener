@@ -21,14 +21,20 @@ app.use(express.json());
 app.use(helmet());
 app.use(express.static("client/")); //permits showing of static files in client folder (ie html)
 
-//set environment - in terminal: export NODE_ENV=development
-//use config to get config variables like config.get.serverLocation
+//set environment - in terminal: $env:NODE_ENV="development"
+//$env:vidly_jwtPrivateKey="mySecureKey"
+//use config to get config variables like config.get("serverLocation")
 console.log("Current config is: " + app.get("env"));
 
 mongoose
-  .connect("mongodb://localhost/url-shortener") //change localhost for production. Define whole string in config files
+  .connect(
+    config.get("databaseLocation1") +
+      config.get("databasePassword") +
+      config.get("databaseLocation2")
+  )
   .then(() => console.log("Connected to database"))
   .catch(err => console.error("Connection to database failed"));
+//local mongoDB location = "mongodb://localhost/url-shortener"
 
 const urlSchema = new mongoose.Schema({
   original_url: String
@@ -103,13 +109,6 @@ app.post("/api/shorturl/new", async (req, res) => {
     if (!addresses) {
       res.status(400).send("Invalid Domain");
     } else {
-      // const shortcut = {
-      //   original_url: req.body.original_url,
-      //   short_url: shortcuts.length + 1
-      // };
-      // shortcuts.push(shortcut);
-      // res.send(shortcut);
-
       let urlEntry = new UrlEntry({
         original_url: req.body.original_url
       });
