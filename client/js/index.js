@@ -1,5 +1,5 @@
-const hostUrl = "http://localhost:5000/";
-//const hostUrl = "https://spmcgrath-url-shortener.herokuapp.com/"
+//const hostUrl = "http://localhost:5000/";
+const hostUrl = "https://spmcgrath-url-shortener.herokuapp.com/";
 
 function urlSubmit() {
   let textValue = $("#original_url").val();

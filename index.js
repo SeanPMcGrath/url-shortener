@@ -21,9 +21,14 @@ app.use(express.json());
 app.use(helmet());
 app.use(express.static("client/")); //permits showing of static files in client folder (ie html)
 
-//set environment - in terminal: $env:NODE_ENV="development"
-//$env:vidly_jwtPrivateKey="mySecureKey"
-//use config to get config variables like config.get("serverLocation")
+/*set environment - in terminal: $env:NODE_ENV="development"
+$env:vidly_jwtPrivateKey="mySecureKey"
+use config to get config variables like config.get("serverLocation")
+to set environment variables in heroku, use in terminal
+heroku config:set NODE_ENV=development
+heroku config:set vidly_jwtPrivateKey=mySecureKey
+can check heroku variables with just heroku config*/
+
 console.log("Current config is: " + app.get("env"));
 
 mongoose
