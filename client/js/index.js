@@ -27,10 +27,24 @@ function urlSubmit() {
     },
     success: data => {
       const newLink = hostUrl + "api/shorturl/" + data._id;
-      $("#responseDiv").append('<a id="newLink2" />');
-      $("#newLink2").attr("href", newLink);
-      $("#newLink2").html(newLink);
+      $("#responseDiv").append('<a id="newLink" />');
+      $("#newLink").attr("href", newLink);
+      $("#newLink").html(newLink);
+      $("#responseDiv").append(
+        '<button id="copyButton" class="btn btn-default" onclick="copyUrl()">Copy Url</button>'
+      );
       $("#original_url").val("");
     }
   });
+}
+
+function copyUrl() {
+  //Make temporary textinput, set value to shorturl, copy text from there, and remove textinput
+  //CSS sets textinpu position as absolute and opacity: 0 to not affect display of page
+  //Seemingly no better way to do this
+  $("body").append('<input id="tempInput" />');
+  $("#tempInput").attr("value", $("#newLink").html());
+  $("#tempInput").select();
+  document.execCommand("copy");
+  $("#tempInput").remove();
 }

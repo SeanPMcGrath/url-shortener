@@ -1,11 +1,14 @@
 -Center submitted url text vertically while showing top part of scrolling texts
--Add copy button for short url
 -Format for mobile
--Add MongoDB functionality
 -Add 404 error message
 -Check if port message at the end of the code is still necessary in production
--figure out switching between development and production environments
+-figure out switching between development and production environments (esp for client js)
+-Figure out how to really set up config options in the different files
+-Specify fonts so they're constant across browsers
 
 Done
 -Deploy on Heroku
 -Figure out if shortcuts array is ever reset by heroku (ie why I would want to use mongoDB instead of just keeping the array) - resets any time the app is restarted
+-Add MongoDB functionality
+-Add copy button for short url
+-Fix the space for shorturls to account for longer id's

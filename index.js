@@ -35,8 +35,9 @@ mongoose
   .connect(
     config.get("databaseLocation1") +
       config.get("databasePassword") +
-      config.get("databaseLocation2")
-  )
+      config.get("databaseLocation2"),
+    { useNewUrlParser: true }
+  ) //newUrlParser came from decreciation warning
   .then(() => console.log("Connected to database"))
   .catch(err => console.error("Connection to database failed"));
 //local mongoDB location = "mongodb://localhost/url-shortener"

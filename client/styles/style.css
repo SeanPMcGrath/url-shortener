@@ -83,6 +83,17 @@ p {
 }
 
 #responseDiv {
-  height: 25px;
+  height: 50px;
+}
+
+#copyButton {
+  margin: 0 0 0 10px;
+}
+
+#tempInput {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
 }
 /*# sourceMappingURL=style.css.map */
