@@ -22,8 +22,13 @@ function urlSubmit() {
       _id: (MongoDB id)
       original_url: "www.reddit.com", 
     }*/
-    error: data => {
-      $("#responseDiv").html(data.responseText);
+    error: (data, textStatus, errorThrown) => {
+      console.log("textStatus: " + textStatus);
+      if (textStatus === "timeout") {
+        $("#responseDiv").html("Server Timeout Error");
+      } else {
+        $("#responseDiv").html(data.status);
+      }
     },
     success: data => {
       const newLink = hostUrl + "api/shorturl/" + data._id;
@@ -34,7 +39,8 @@ function urlSubmit() {
         '<button id="copyButton" class="btn btn-default" onclick="copyUrl()">Copy Url</button>'
       );
       $("#original_url").val("");
-    }
+    },
+    timeout: 5000
   });
 }
 

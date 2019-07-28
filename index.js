@@ -23,6 +23,7 @@ app.use(express.static("client/")); //permits showing of static files in client 
 
 /*set environment - in terminal: $env:NODE_ENV="development"
 $env:vidly_jwtPrivateKey="mySecureKey"
+$env:url_shortener_databasePassword=""
 use config to get config variables like config.get("serverLocation")
 to set environment variables in heroku, use in terminal
 heroku config:set NODE_ENV=development
@@ -112,7 +113,9 @@ app.post("/api/shorturl/new", async (req, res) => {
   }
 
   dns.lookup(checkedUrl, async function(err, addresses, family) {
-    if (!addresses) {
+    console.log(addresses);
+    //No idea what that specific domain is. Only started getting it after started to use MongoDB Atlas.
+    if (!addresses || addresses === "92.242.140.2") {
       res.status(400).send("Invalid Domain");
     } else {
       let urlEntry = new UrlEntry({
