@@ -12,4 +12,4 @@ Done
 -Add MongoDB functionality
 -Add copy button for short url
 -Fix the space for shorturls to account for longer id's
--Add 404 error message (can play around more on deployed version but I think this is working. Hard to test because errors apparently don't get returned on cross domain requests. Request just hangs)
+-Add 404 error message (can play around more on deployed version but I seems to be working. Hard to test because errors apparently don't get returned on cross domain requests. Request just hangs)

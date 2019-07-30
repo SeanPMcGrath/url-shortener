@@ -27,7 +27,7 @@ function urlSubmit() {
       if (textStatus === "timeout") {
         $("#responseDiv").html("Server Timeout Error");
       } else {
-        $("#responseDiv").html(data.status);
+        $("#responseDiv").html(data.responseText);
       }
     },
     success: data => {

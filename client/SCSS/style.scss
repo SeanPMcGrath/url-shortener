@@ -1,27 +1,27 @@
-$c-background: pink;
+$c-background: #51d0de;
 $c-borders: darken($c-background, 3%);
+
+* {
+  font-family: "Muli", sans-serif;
+}
 
 body {
   display: flex;
   height: 100vh;
   background-color: $c-background;
-  align-items: center;
-  justify-content: center;
 }
 
 #contentDiv {
-  width: 650px;
-  margin: auto;
-  transform: translate(0, -10%);
-  background-color: lighten($c-background, 5%);
+  width: 100vw;
+  margin: 20vh auto auto auto;
+  background-color: lighten($c-background, 0%);
   padding: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border-right: 2px solid $c-borders;
-  border-bottom: 2px solid $c-borders;
-  border-left: 1px solid $c-borders;
-  border-top: 1px solid $c-borders;
+  // border-right: 2px solid $c-borders;
+  // border-bottom: 2px solid $c-borders;
+  // border-left: 1px solid $c-borders;
+  // border-top: 1px solid $c-borders;
   border-radius: 5px;
 }
 
@@ -34,14 +34,20 @@ body {
   text-align: center;
 }
 
+.instructions {
+  font-family: "Montserrat", sans-serif;
+}
+
 #inputDiv {
   margin: 20px auto;
   display: flex;
   justify-content: center;
+  max-width: 60vw;
 }
 
 #original_url {
   width: 500px;
+  max-width: 100%;
 }
 
 p {
@@ -49,11 +55,8 @@ p {
 }
 
 .reactionDiv {
-  height: 70px;
-  //background-color: aqua;
   display: flex;
   justify-content: center;
-  //align-items: center;
   margin: 10px;
   border: none;
   resize: none;
@@ -62,11 +65,19 @@ p {
 
 #submittedUrl {
   overflow: auto;
-  height: 75px;
+  max-height: 75px;
 }
 
 #responseDiv {
-  height: 50px;
+  //height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#newLink {
+  word-wrap: break-word;
+  padding: 5px;
 }
 
 #copyButton {
@@ -79,4 +90,10 @@ p {
   left: 0px;
   opacity: 0;
   //Can't use visibility: hidden because then value isn't read
+}
+
+@media (max-width: 400px) {
+  #contentDiv {
+    margin: 0;
+  }
 }

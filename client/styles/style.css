@@ -1,23 +1,19 @@
+* {
+  font-family: "Muli", sans-serif;
+}
+
 body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   height: 100vh;
-  background-color: pink;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  background-color: #51d0de;
 }
 
 #contentDiv {
-  width: 650px;
-  margin: auto;
-  -webkit-transform: translate(0, -10%);
-          transform: translate(0, -10%);
-  background-color: #ffdae0;
+  width: 100vw;
+  margin: 20vh auto auto auto;
+  background-color: #51d0de;
   padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -26,13 +22,6 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  border-right: 2px solid #ffb1be;
-  border-bottom: 2px solid #ffb1be;
-  border-left: 1px solid #ffb1be;
-  border-top: 1px solid #ffb1be;
   border-radius: 5px;
 }
 
@@ -45,6 +34,10 @@ body {
   text-align: center;
 }
 
+.instructions {
+  font-family: "Montserrat", sans-serif;
+}
+
 #inputDiv {
   margin: 20px auto;
   display: -webkit-box;
@@ -53,10 +46,12 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  max-width: 60vw;
 }
 
 #original_url {
   width: 500px;
+  max-width: 100%;
 }
 
 p {
@@ -64,7 +59,6 @@ p {
 }
 
 .reactionDiv {
-  height: 70px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -79,11 +73,24 @@ p {
 
 #submittedUrl {
   overflow: auto;
-  height: 75px;
+  max-height: 75px;
 }
 
 #responseDiv {
-  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#newLink {
+  word-wrap: break-word;
+  padding: 5px;
 }
 
 #copyButton {
@@ -95,5 +102,11 @@ p {
   top: 0px;
   left: 0px;
   opacity: 0;
+}
+
+@media (max-width: 400px) {
+  #contentDiv {
+    margin: 0;
+  }
 }
 /*# sourceMappingURL=style.css.map */
