@@ -1,9 +1,6 @@
--Center submitted url text vertically while showing top part of scrolling texts
--Format for mobile
 -Check if port message at the end of the code is still necessary in production
 -figure out switching between development and production environments (esp for client js)
 -Figure out how to really set up config options in the different files
--Specify fonts so they're constant across browsers
 -Add functionality to submit url by hitting enter
 
 Done
@@ -13,3 +10,5 @@ Done
 -Add copy button for short url
 -Fix the space for shorturls to account for longer id's
 -Add 404 error message (can play around more on deployed version but I seems to be working. Hard to test because errors apparently don't get returned on cross domain requests. Request just hangs)
+-Center submitted url text vertically while showing top part of scrolling texts
+-Format for mobile
